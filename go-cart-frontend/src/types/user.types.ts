@@ -5,4 +5,8 @@ export type User = {
   email: string;
   phone: string;
   token: string;
+  refresh_token: string;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
 };

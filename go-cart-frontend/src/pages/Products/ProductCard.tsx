@@ -12,7 +12,7 @@ function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCartStore();
 
   return (
-    <div className="h-[400px] md:h-[300px] w-[300px]">
+    <div className="h-[400px]  w-[300px]">
       <div className="relative bg-secondary h-80 rounded-lg overflow-hidden flex items-center">
         <div className="absolute top-2 left-2">
           <Button

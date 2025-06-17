@@ -19,7 +19,7 @@ function CartPage() {
         My <GradiantText text="Cart" size="3xl" />
       </h1>
 
-      <div className="flex gap-4 justify-between w-full h-full items-start">
+      <div className="flex flex-col md:flex-row gap-4 justify-between w-full h-full items-center md:items-start">
         {items.length > 0 ? (
           <div className="flex flex-col items-center justify-center gap-4 container mt-8">
             {items.map((i) => (
@@ -66,12 +66,12 @@ function CartPage() {
             ))}
           </div>
         ) : (
-          <h1 className="text-muted-foreground py-4 px-2">
+          <h1 className="text-muted-foreground py-4 px-2 flex items-start w-full">
             No items in the cart.
           </h1>
         )}
 
-        <div className="bg-secondary  w-md p-4 px-2 flex flex-col justify-between">
+        <div className="bg-secondary  w-sm md:w-md p-4 px-2 flex flex-col justify-between">
           <div className="w-full gap-2 flex flex-col  px-2 justify-center border-b-2 pb-4">
             {items.length > 0 ? (
               items.map((i) => (

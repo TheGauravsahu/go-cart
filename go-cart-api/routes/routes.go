@@ -20,6 +20,7 @@ func RegisterRoutes(r *gin.Engine, app *application.Application) {
 	user.Use(middleware.Authenticate(app.UserCollection))
 	{
 		user.GET("/me", controllers.GetProfile(app))
+		user.POST("/me", controllers.UpdateProfile(app))
 
 		// Address Routes
 		addresses := user.Group("/address")

@@ -54,10 +54,16 @@ function ProductsPage() {
         </form>
       </div>
 
-      <div className="h-full w-full md:container flex flex-col md:flex-row flex-wrap gap-8 items-center justify-center md:justify-normal mt-8">
-        {displayedProducts?.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+      <div className=" h-full w-full md:container flex flex-col md:flex-row flex-wrap gap-8 items-center justify-center md:justify-normal mt-8 ">
+        {(displayedProducts ?? []).length > 0 ? (
+          (displayedProducts ?? []).map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        ) : (
+          <div>
+            <p>No products found.</p>
+          </div>
+        )}
       </div>
     </div>
   );

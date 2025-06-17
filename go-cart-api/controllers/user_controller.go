@@ -168,9 +168,65 @@ func GetProfile(app *application.Application) gin.HandlerFunc {
 		}
 
 		user.Password = ""
-		user.Token = ""
-		user.Refresh_Token = ""
 
 		c.JSON(http.StatusOK, user)
+	}
+}
+
+func UpdateProfile(app *application.Application) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+
+		userID, exists := c.Get("user_id")
+		if !exists {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "could not get user from context"})
+			return
+		}
+
+		var userUpdate struct {
+			First_Name string `json:"first_name" validate:"required,min=2,max=30"`
+			Last_Name  string `json:"last_name" validate:"required,min=2,max=30"`
+			Email      string `json:"email" validate:"email,required"`
+			Phone      string `json:"phone" validate:"required,min=10"`
+		}
+
+		if err := c.ShouldBindJSON(&userUpdate); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
+			return
+		}
+		if errs := utils.ValidateStruct(userUpdate); errs != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"errors": errs})
+			return
+		}
+
+		update := bson.M{
+			"$set": bson.M{
+				"first_name": userUpdate.First_Name,
+				"last_name":  userUpdate.Last_Name,
+				"email":      userUpdate.Email,
+				"phone":      userUpdate.Phone,
+				"updated_at": time.Now(),
+			},
+		}
+
+		_, err := app.UserCollection.UpdateOne(ctx, bson.M{"user_id": userID}, update)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update profile"})
+			return
+		}
+		var updatedUser models.User
+		err = app.UserCollection.FindOne(ctx, bson.M{"user_id": userID}).Decode(&updatedUser)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch updated user"})
+			return
+		}
+
+		updatedUser.Password = ""
+
+		c.JSON(http.StatusOK, gin.H{"message": "Profile updated successfully", "data": gin.H{
+			"user": updatedUser,
+		}},
+		)
 	}
 }

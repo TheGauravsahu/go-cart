@@ -29,7 +29,7 @@ function LoginPage({
   isModal: boolean;
   closeDialog?: () => void;
 }) {
-  const { mutate: loginUser, isPending } = useLogin(isModal,closeDialog);
+  const { mutate: loginUser, isPending } = useLogin(isModal, closeDialog);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(formSchema),
@@ -46,12 +46,12 @@ function LoginPage({
   return (
     <div className="w-full flex justify-center px-4 mt-16 md:mt-0 md:px-0">
       <div
-        className={`bg-white  w-xl mx-auto p-8 rounded-lg ${
+        className={`w-xl mx-auto p-8 rounded-lg ${
           isModal ? "" : "shadow border"
         }`}
       >
-        <h1 className="font-semibold text-3xl text-center">
-          Login to your <GradiantText size="3xl" text="account" />
+        <h1 className="font-semibold md:text-3xl text-2xl text-center w-full">
+          Login to your <GradiantText size="2xl" text="account" />
         </h1>
 
         <Form {...form}>

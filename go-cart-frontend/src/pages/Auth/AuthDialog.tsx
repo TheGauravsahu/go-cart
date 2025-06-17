@@ -8,7 +8,7 @@ function AuthDialog({ children }: { children: React.ReactNode }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>{children}</DialogTrigger>
-      <DialogContent className="w-[60vw] h-[60vh] overflow-hidden flex items-center justify-center">
+      <DialogContent className="md:w-[60vw] h-[50vh] md:h-[60vh] overflow-hidden flex items-center justify-center">
         <LoginPage isModal={true} closeDialog={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
