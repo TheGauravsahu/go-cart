@@ -81,6 +81,7 @@ func EditAddress(app *application.Application) gin.HandlerFunc {
 		update := bson.M{
 			"$set": bson.M{
 				"address.$.house":      address.House,
+				"address.$.state":      address.State,
 				"address.$.street":     address.Street,
 				"address.$.city":       address.City,
 				"address.$.pincode":    address.Pincode,
@@ -142,7 +143,7 @@ func GetAllAddresses(app *application.Application) gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"addresses": user.Address_Details})
+		c.JSON(http.StatusOK, gin.H{"message": "Addresses fetched successfully", "data": gin.H{"addresses": user.Address_Details}})
 	}
 }
 

@@ -44,7 +44,7 @@ function LoginPage({
   }
 
   return (
-    <div className="w-full flex justify-center px-4 mt-16 md:mt-0 md:px-0">
+    <div className="w-full flex justify-center px-4 mt-16 md:px-0">
       <div
         className={`w-xl mx-auto p-8 rounded-lg ${
           isModal ? "" : "shadow border"

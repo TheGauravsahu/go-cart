@@ -16,7 +16,7 @@ type User struct {
 	Token           string             `json:"token"`
 	Refresh_Token   string             `json:"refresh_token"`
 	Created_At      time.Time          `json:"created_at"`
-	Updated_At       time.Time          `json:"updated_at"`
+	Updated_At      time.Time          `json:"updated_at"`
 	User_ID         string             `json:"user_id"`
 	OrderHistory    []Order            `json:"orders" bson:"orders"`
 	Address_Details []Address          `json:"address" bson:"address"`
@@ -55,9 +55,10 @@ type CartItem struct {
 
 type Address struct {
 	Address_ID string    `json:"address_id" bson:"address_id"`
-	House      string    `json:"house_name" bson:"house_name" validate:"required"`
-	Street     string    `json:"street_name" bson:"street_name" validate:"required"`
-	City       string    `json:"city_name" bson:"city_name" validate:"required"`
+	House      string    `json:"house" bson:"house" validate:"required"`
+	State      string    `json:"state" bson:"state" validate:"required"`
+	Street     string    `json:"street" bson:"street" validate:"required"`
+	City       string    `json:"city" bson:"city" validate:"required"`
 	Pincode    string    `json:"pincode" bson:"pincode" validate:"required,len=6"`
 	CreatedAt  time.Time `bson:"created_at" json:"created_at"`
 	UpdatedAt  time.Time `bson:"updated_at" json:"updated_at"`

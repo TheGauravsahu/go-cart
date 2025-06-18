@@ -24,17 +24,17 @@ const Header = () => {
   const { isAuthenticated } = useAuthStore();
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-white">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center w-full">
+    <header className="w-full sticky top-0 right-0 left-0 z-50 bg-white">
+      <div className="md:px-16 px-4 py-3 flex justify-between items-center w-full">
         <div>
           <Link to="/">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">
               Go<span>Cart.</span>
             </h1>
           </Link>
         </div>
 
-        <nav className="hidden md:block space-x-4">
+        <nav className="hidden md:block space-x-8">
           <Link to="/" className="text-gray-700 hover:text-pink-600">
             Home
           </Link>
@@ -44,6 +44,7 @@ const Header = () => {
           <Link to="/" className="text-gray-700 hover:text-pink-600">
             About Us
           </Link>
+       
         </nav>
 
         <div className="flex items-center">

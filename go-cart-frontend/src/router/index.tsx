@@ -8,6 +8,7 @@ import SignupPage from "@/pages/Auth/SignupPage";
 import LoginPage from "@/pages/Auth/LoginPage";
 import CartPage from "@/pages/Cart/CartPage";
 import ProfilePage from "@/pages/Profile/ProfilePage";
+import ProfileLayout from "@/components/ProfileLayout";
 
 const AppRoutes = () => (
   <Router>
@@ -23,7 +24,10 @@ const AppRoutes = () => (
         <Route path="/login" element={<LoginPage isModal={false} />} />
 
         {/* Protected routes */}
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile" element={<ProfileLayout />}>
+          <Route index element={<ProfilePage />} />
+        </Route>
+
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

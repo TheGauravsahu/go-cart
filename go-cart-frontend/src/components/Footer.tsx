@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="w-full h-[50vh]">
-      <div className=" bg-black w-full h-full text-white flex flex-col md:flex-row md:items-center justify-center gap-8  p-4">
+    <footer className="w-full h-[50vh] absolute z-50 right-0 left-0">
+      <div className="z-50 bg-black w-full h-full text-white flex flex-col lg:flex-row md:items-center justify-center gap-8  p-4">
         <div>
-          <h1 className="md:text-[30vh]  text-4xl font-bold leading-tight">
+          <h1 className="lg:text-[250px] md:text-[200px] text-4xl font-bold leading-tight">
             GoCart
           </h1>
           <p className="text-white/60 my-2 md:ml-8">

@@ -35,7 +35,7 @@ function ProductsPage() {
     : products;
 
   return (
-    <div className="p-4 md:px-12 h-full w-full pb-16">
+    <div className="p-4 md:px-16 h-full w-full pb-16">
       <h1 className="text-4xl font-bold my-2">
         Latest
         <GradiantText text="Products" size="3xl" />
@@ -54,7 +54,7 @@ function ProductsPage() {
         </form>
       </div>
 
-      <div className=" h-full w-full md:container flex flex-col md:flex-row flex-wrap gap-8 items-center justify-center md:justify-normal mt-8 ">
+      <div className=" h-full w-full  flex flex-col md:flex-row flex-wrap gap-8 items-center justify-center md:justify-normal mt-8 ">
         {(displayedProducts ?? []).length > 0 ? (
           (displayedProducts ?? []).map((product) => (
             <ProductCard key={product.id} product={product} />
