@@ -8,6 +8,7 @@ export const api = axios.create({
   },
 });
 
+//  add token to every request
 api.interceptors.request.use(
   (config) => {
     const { user } = useAuthStore.getState();
@@ -18,3 +19,21 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
+
+// Handle expired/invalid token
+api.interceptors.response.use(
+  (res)=> res,
+  (err) =>{
+    const errMsg = err.response?.data?.error;
+     if (
+      err.response?.status === 401 &&
+      (errMsg === "invalid or expired token" || errMsg === "token mismatch")
+    ) {
+      const store = useAuthStore.getState();
+      store.clearUser();
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }
+    return Promise.reject(err);
+  }
+)

@@ -7,7 +7,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-full h-full">
       <Header />
-      <Toaster />
+      <Toaster position="bottom-center"/>
       <main className="min-h-screen p-2 w-full">{children}</main>
       <Footer />
     </div>

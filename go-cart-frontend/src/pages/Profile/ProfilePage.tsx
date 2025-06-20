@@ -15,7 +15,7 @@ function ProfilePage() {
       <CardHeader className="border-b">
         <CardTitle className="text-xl">Personal Information</CardTitle>
         <EditProfileDialog>
-          <CardAction className="text-pink-600 flex items-center gap-2">
+          <CardAction className="text-pink-600 flex items-center gap-2 cursor-pointer">
             <SquarePen size={20} />
             <span className="hidden md:block">Change Profile Information</span>
           </CardAction>
