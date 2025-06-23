@@ -39,10 +39,27 @@ func AddAddress(app *application.Application) gin.HandlerFunc {
 			return
 		}
 
+		var user struct {
+			Address []models.Address `bson:"address"`
+		}
+
+		err := app.UserCollection.FindOne(ctx, bson.M{"user_id": userID}).Decode(&user)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to retrieve user addresses"})
+			return
+		}
+
+		if len(user.Address) >= 5 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "You have reached the maximum limit of 5 saved addresses. Please remove an existing address before adding a new one.",
+			})
+			return
+		}
+
 		filter := bson.M{"user_id": userID}
 		update := bson.M{"$push": bson.M{"address": address}}
 
-		_, err := app.UserCollection.UpdateOne(ctx, filter, update)
+		_, err = app.UserCollection.UpdateOne(ctx, filter, update)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to add address"})
 			return
@@ -178,7 +195,7 @@ func GetAddressByID(app *application.Application) gin.HandlerFunc {
 		}
 		for _, address := range user.Address_Details {
 			if address.Address_ID == addressID {
-				c.JSON(http.StatusOK, gin.H{"message": "fetched user address successfully", "address": address})
+				c.JSON(http.StatusOK, gin.H{"message": "fetched user address successfully", "data": address})
 				return
 			}
 		}

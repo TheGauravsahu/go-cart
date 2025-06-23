@@ -1,7 +1,6 @@
 import ErrorOccured from "@/components/ErrorOccured";
 import GradiantText from "@/components/GradiantText";
 import Loader from "@/components/Loader";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
@@ -12,9 +11,9 @@ import {
 import { useAddresses } from "@/hooks/useAddress";
 import { formatDate } from "@/lib/utils";
 import { Address } from "@/types/address.types";
-import { Pencil } from "lucide-react";
 import DeleteAddressDialog from "./DeleteAddressDialog";
 import AddAddress from "./AddAddress";
+import EditAddressDialog from "./EditAddressDialog";
 
 function ListAddresses() {
   const { data, isPending, isError } = useAddresses();
@@ -32,7 +31,7 @@ function ListAddresses() {
         </h1>
         <AddAddress />
       </div>
-      <div className="w-full flex items-center flex-wrap gap-4">
+      <div className="w-full flex flex-col justify-center md:flex-row md:justify-normal items-center flex-wrap gap-4 pb-8">
         {addresses.length > 0 ? (
           addresses.map((addr) => (
             <AddressCard key={addr.address_id} addr={addr} />
@@ -49,15 +48,13 @@ const AddressCard = ({ addr }: { addr: Address }) => {
   return (
     <Card
       key={addr.pincode}
-      className="w-82 rounded-lg bg-pink-500/5 border transition-all duration-300 hover:border-pink-700 cursor-pointer"
+      className="h-60 w-82 rounded-lg bg-pink-500/5 border transition-all duration-300 hover:border-pink-700 cursor-pointer"
     >
       <CardHeader>
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-semibold text-pink-700">Address</h3>
           <CardAction className="flex gap-2">
-            <Button className="cursor-pointer" variant="outline" size="icon">
-              <Pencil />
-            </Button>
+            <EditAddressDialog addrId={addr.address_id} />
             <DeleteAddressDialog addrId={addr.address_id} />
           </CardAction>
         </div>

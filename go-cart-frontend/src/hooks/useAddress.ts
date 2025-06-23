@@ -1,4 +1,10 @@
-import { addAddress, deleteAddress, listAddresses } from "@/api/address";
+import {
+  addAddress,
+  deleteAddress,
+  editAddress,
+  getAddressById,
+  listAddresses,
+} from "@/api/address";
 import { AddAddressValues } from "@/pages/Profile/Addresses/AddAddress";
 import { Address } from "@/types/address.types";
 import { ApiResponse, ErrorResponse } from "@/types/apiRes.types";
@@ -10,6 +16,14 @@ export const useAddresses = () => {
     queryKey: ["addresses"],
     queryFn: listAddresses,
     staleTime: 1000 * 60 * 10, // 10 minutes
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useAddressById = (addrId: string) => {
+  return useQuery<ApiResponse<Address>>({
+    queryKey: ["addresses", addrId],
+    queryFn: () => getAddressById(addrId),
     refetchOnWindowFocus: false,
   });
 };
@@ -27,6 +41,24 @@ export const useAddAddress = () => {
     onError: (error: { response: { data: ErrorResponse } }) => {
       const errorMessage =
         error.response?.data?.error || "Failed to add address.";
+      toast.error(errorMessage);
+    },
+  });
+};
+
+export const useEditAddress = (addrId: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (addrData: AddAddressValues) => editAddress(addrId, addrData),
+    onSuccess: (data) => {
+      const successMsg = data.message || "Address deleted successfully.";
+      queryClient.invalidateQueries({ queryKey: ["addresses"] });
+      toast.success(successMsg);
+    },
+    onError: (error: { response: { data: ErrorResponse } }) => {
+      const errorMessage =
+        error.response?.data?.error || "Failed to delete address.";
       toast.error(errorMessage);
     },
   });

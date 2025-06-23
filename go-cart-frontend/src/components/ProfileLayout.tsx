@@ -6,7 +6,7 @@ const ProfileLayout = () => {
   return (
     <SidebarProvider>
       <ProfileSidebar />
-      <div className="px-4 w-full border-t pt-4">
+      <div className="px-4 w-full  pt-4">
         <h2 className="text-xl font-semibold flex items-center gap-1 mb-8">
           <SidebarTrigger />
           Your Profile

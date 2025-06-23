@@ -44,14 +44,14 @@ function LoginPage({
   }
 
   return (
-    <div className="w-full flex justify-center px-4 mt-16 md:px-0">
+    <div className="w-full flex justify-center px-4 md:px-0">
       <div
         className={`w-xl mx-auto p-8 rounded-lg ${
-          isModal ? "" : "shadow border"
+          isModal ? "" : "shadow border mt-16"
         }`}
       >
-        <h1 className="font-semibold md:text-3xl text-2xl text-center w-full">
-          Login to your <GradiantText size="2xl" text="account" />
+        <h1 className="font-semibold text-3xl text-center w-full">
+          Login to your <GradiantText size="3xl" text="account" />
         </h1>
 
         <Form {...form}>

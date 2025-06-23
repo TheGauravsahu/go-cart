@@ -24,7 +24,7 @@ const Header = () => {
   const { isAuthenticated } = useAuthStore();
 
   return (
-    <header className="w-full sticky top-0 right-0 left-0 z-50 bg-white">
+    <header className="w-full sticky top-0 right-0 left-0 z-50 bg-background border-b">
       <div className="md:px-16 px-4 py-3 flex justify-between items-center w-full">
         <div>
           <Link to="/">

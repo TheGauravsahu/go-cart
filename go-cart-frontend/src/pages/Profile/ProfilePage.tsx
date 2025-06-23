@@ -11,7 +11,7 @@ import EditProfileDialog from "./EditProfileDialog";
 
 function ProfilePage() {
   return (
-    <Card className="w-sm lg:w-4xl md:w-3xl md:mx-0 mx-auto h-[75vh] bg-secondary rounded-none shadow-none">
+    <Card className="w-sm lg:w-4xl md:w-3xl md:mx-0 mx-auto h-[75vh]">
       <CardHeader className="border-b">
         <CardTitle className="text-xl">Personal Information</CardTitle>
         <EditProfileDialog>
